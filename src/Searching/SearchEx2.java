@@ -9,9 +9,13 @@ public class SearchEx2 {
         State temp = new State(st);
         int loc = search(s, temp);
         if (loc == -1){
-            System.out.println("State not found");
-            System.out.println(s[loc].getName() +  " found at " + loc);
+            System.out.println("State not found"); 
         }
+            else{
+                    System.out.println(s[loc].getName() +  " found at " + loc);
+                    }
+            
+       
     }
 
     public static int search (Object[] a, Object searchValue){
