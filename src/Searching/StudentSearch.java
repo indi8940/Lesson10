@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 
 public class StudentSearch extends javax.swing.JFrame {
-
+    ISSStudent iss[]  = new ISSStudent[100];
     public StudentSearch() {
         initComponents();
         try{
@@ -16,11 +16,16 @@ public class StudentSearch extends javax.swing.JFrame {
                 nm = b.readLine();
                 ad = b.readLine();
                 id = Integer.parseInt(b.readLine());
+                for(int x=0; x<100; x++){
+                    String nom=b.readLine();
+                    String add = b.readLine();
+                    id = Integer.parseInt(b.readLine());
+                    iss[x]=new ISSStudent(nom,add,id);
+                }
                 //print these to verify
                 //System.out.println(nm + "\t" + ad + "\t" + id);
                 //iss[i] = new ISSStudent (nm,ad,id)
-            }
-            b.close();
+            }b.close();
         }catch(Exception e){
             System.out.println(e.toString());   
         }
@@ -54,18 +59,23 @@ public class StudentSearch extends javax.swing.JFrame {
         btnsearch = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jTextField1 = new javax.swing.JTextField();
+        txtdata = new javax.swing.JTextArea();
+        txtid = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         btnsearch.setText("Search");
+        btnsearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnsearchActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Clear");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txtdata.setColumns(20);
+        txtdata.setRows(5);
+        jScrollPane1.setViewportView(txtdata);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -74,13 +84,13 @@ public class StudentSearch extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnsearch)
                         .addGap(18, 18, 18)
                         .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                        .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -90,13 +100,25 @@ public class StudentSearch extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnsearch)
                     .addComponent(jButton2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnsearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsearchActionPerformed
+    
+        int id = Integer.parseInt(txtid.getText());
+        ISSStudent temp = new ISSStudent(null,null, id);
+        int result = search(iss,temp);
+        if(result >= 0)
+         txtdata.setText(iss[result].toString());
+        else
+            txtdata.setText("Student not found");
+       // txtdata.setText(this.toString());
+    }//GEN-LAST:event_btnsearchActionPerformed
 
     /**
      * @param args the command line arguments
@@ -143,7 +165,7 @@ public class StudentSearch extends javax.swing.JFrame {
     private javax.swing.JButton btnsearch;
     private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextArea txtdata;
+    private javax.swing.JTextField txtid;
     // End of variables declaration//GEN-END:variables
 }

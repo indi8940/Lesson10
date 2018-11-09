@@ -27,5 +27,4 @@ public class ISSStudent implements Comparable {
         else
             return 0;
     }
-    
 }
