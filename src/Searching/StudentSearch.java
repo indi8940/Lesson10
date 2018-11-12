@@ -5,31 +5,27 @@ import java.io.FileReader;
 
 public class StudentSearch extends javax.swing.JFrame {
     ISSStudent iss[]  = new ISSStudent[100];
+    int id = this.id;
+    
     public StudentSearch() {
         initComponents();
         try{
         FileReader f = new FileReader("src\\searching\\studata.txt");
         BufferedReader b = new BufferedReader(f);
             for (int i = 0; i < 100; i++) {
-                String nm, ad;
-                int id;
-                nm = b.readLine();
-                ad = b.readLine();
-                id = Integer.parseInt(b.readLine());
-                for(int x=0; x<100; x++){
-                    String nom=b.readLine();
-                    String add = b.readLine();
-                    id = Integer.parseInt(b.readLine());
-                    iss[x]=new ISSStudent(nom,add,id);
-                }
+                String nom = b.readLine();
+                String add = b.readLine();       
+                int id = Integer.parseInt(b.readLine());
+                iss[i]=new ISSStudent(nom,add,id); 
                 //print these to verify
-                //System.out.println(nm + "\t" + ad + "\t" + id);
-                //iss[i] = new ISSStudent (nm,ad,id)
+                //System.out.println(nom + "\t" + add + "\t" + id);
+                //iss[i] = new ISSStudent (nom,add,id);
             }b.close();
         }catch(Exception e){
             System.out.println(e.toString());   
         }
     }
+    
         public static int search (Object[] a, Object searchValue){
 	   int left = 0;
 	   int right = a.length-1;
@@ -72,10 +68,21 @@ public class StudentSearch extends javax.swing.JFrame {
         });
 
         jButton2.setText("Clear");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         txtdata.setColumns(20);
         txtdata.setRows(5);
         jScrollPane1.setViewportView(txtdata);
+
+        txtid.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtidActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -119,6 +126,15 @@ public class StudentSearch extends javax.swing.JFrame {
             txtdata.setText("Student not found");
        // txtdata.setText(this.toString());
     }//GEN-LAST:event_btnsearchActionPerformed
+
+    private void txtidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtidActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtidActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       txtdata.setText("");
+       txtid.setText("");
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
