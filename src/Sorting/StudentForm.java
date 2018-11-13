@@ -26,20 +26,7 @@ public class StudentForm extends javax.swing.JFrame {
         data = new DefaultListModel();
         studentlist.setModel(data);
 
-        try {
-            FileReader f = new FileReader("src\\searching\\studata.txt");
-            BufferedReader b = new BufferedReader(f);
-            for (int i = 0; i < 100; i++) {
-                String nom = b.readLine();
-                String add = b.readLine();
-                int id = Integer.parseInt(b.readLine());
-                iss[i] = new ISSStudent(nom, add, id);
-
-            }
-            b.close();
-        } catch (Exception e) {
-            System.out.println(e.toString());
-        }
+        
     }
 
     /**
@@ -109,6 +96,22 @@ public class StudentForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnopenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnopenActionPerformed
+       
+        try {
+            FileReader f = new FileReader("src\\searching\\studata.txt");
+            BufferedReader b = new BufferedReader(f);
+            for (int i = 0; i < 100; i++) {
+                String nom = b.readLine();
+                String add = b.readLine();
+                int id = Integer.parseInt(b.readLine());
+                iss[i] = new ISSStudent(nom, add, id);
+
+            }
+            b.close();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+        
         data.clear();
         //will list names in original file order (sorted by id, NOT by name)
         for (ISSStudent s : iss) {
