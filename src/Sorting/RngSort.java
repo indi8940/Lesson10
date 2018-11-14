@@ -120,8 +120,8 @@ public class RngSort extends javax.swing.JFrame {
         numbers.clear();
         bubbleSort(numrandom);
         //redisplay in list
-         for (int i = 0; i < 50000; i++) {
-            numbers.addElement(numrandom[i]);
+         for (int s: numrandom) {
+            numbers.addElement(s);
         }
     }//GEN-LAST:event_btnbubbleActionPerformed
 
