@@ -49,8 +49,18 @@ public class RngSort extends javax.swing.JFrame {
         });
 
         btnexchange.setText("exchange Sort");
+        btnexchange.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnexchangeActionPerformed(evt);
+            }
+        });
 
         btnInsertion.setText("Insertion Sort");
+        btnInsertion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInsertionActionPerformed(evt);
+            }
+        });
 
         btnquick.setText("Quick Sort");
 
@@ -124,6 +134,24 @@ public class RngSort extends javax.swing.JFrame {
             numbers.addElement(s);
         }
     }//GEN-LAST:event_btnbubbleActionPerformed
+
+    private void btnexchangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnexchangeActionPerformed
+         numbers.clear();
+        selectionSort(numrandom);
+        //redisplay in list
+         for (int s: numrandom) {
+            numbers.addElement(s);
+        }
+    }//GEN-LAST:event_btnexchangeActionPerformed
+
+    private void btnInsertionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertionActionPerformed
+         numbers.clear();
+       insertionSort(numrandom);
+        //redisplay in list
+         for (int s: numrandom) {
+            numbers.addElement(s);
+        }
+    }//GEN-LAST:event_btnInsertionActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
