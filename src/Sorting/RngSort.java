@@ -11,10 +11,7 @@ public class RngSort extends javax.swing.JFrame {
     public RngSort() {
         initComponents();
         numbers = new DefaultListModel();
-        lstoutput.setModel(numbers);
-            for (int i = 0; i < 50000; i++) {
-            numrandom[i]= generate();
-         }
+        lstoutput.setModel(numbers);         
         
     }
     @SuppressWarnings("unchecked")
@@ -115,7 +112,9 @@ public class RngSort extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnrandomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnrandomActionPerformed
-       
+         for (int i = 0; i < 50000; i++) {
+            numrandom[i]= generate();
+         }
         numbers.clear();
         //will list names in original file order (sorted by id, NOT by name)   
         for (int i = 0; i < 50000; i++) {
