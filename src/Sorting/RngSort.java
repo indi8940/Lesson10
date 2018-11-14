@@ -1,31 +1,38 @@
 package Sorting;
 
+
+import javax.swing.DefaultListModel;
+
 public class RngSort extends javax.swing.JFrame {
-    public static double rng;
+    
+   DefaultListModel numbers;
+   int numrandom[] = new int [50000];
+   
     public RngSort() {
         initComponents();
+        numbers = new DefaultListModel();
+        lstoutput.setModel(numbers);
+            for (int i = 0; i < 50000; i++) {
+            numrandom[i]= generate();
+         }
+        
     }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jButton2 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtoutput = new javax.swing.JTextArea();
         btnrandom = new javax.swing.JButton();
         btnbubble = new javax.swing.JButton();
         btnexchange = new javax.swing.JButton();
         btnInsertion = new javax.swing.JButton();
         btnquick = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        lstoutput = new javax.swing.JList<>();
 
         jButton2.setText("jButton2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        txtoutput.setColumns(20);
-        txtoutput.setRows(5);
-        jScrollPane1.setViewportView(txtoutput);
 
         btnrandom.setText("Generate Numbers");
         btnrandom.addActionListener(new java.awt.event.ActionListener() {
@@ -47,63 +54,75 @@ public class RngSort extends javax.swing.JFrame {
 
         btnquick.setText("Quick Sort");
 
+        jScrollPane2.setViewportView(lstoutput);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(39, 39, 39)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnInsertion)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(btnexchange)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                            .addGap(8, 8, 8)
-                                            .addComponent(btnbubble)))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(31, 31, 31)
-                                .addComponent(btnrandom)))
-                        .addGap(0, 12, Short.MAX_VALUE))
+                            .addComponent(btnInsertion)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(btnexchange)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addGap(8, 8, 8)
+                                    .addComponent(btnbubble)))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addComponent(btnquick)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(29, 29, 29)
+                        .addComponent(btnrandom))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(btnquick)))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnrandom)
-                .addGap(18, 18, 18)
-                .addComponent(btnbubble)
-                .addGap(18, 18, 18)
-                .addComponent(btnexchange)
-                .addGap(18, 18, 18)
-                .addComponent(btnInsertion)
-                .addGap(18, 18, 18)
-                .addComponent(btnquick)
-                .addContainerGap(102, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnrandom)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnbubble)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnexchange)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnInsertion)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnquick)
+                        .addGap(0, 91, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnrandomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnrandomActionPerformed
-        for (int i = 0; i < 50000; i++) {
-            rng = Math.floor(Math.random() * 50000 + 1);
-            txtoutput.append("\n" + rng);
-        }
        
+        numbers.clear();
+        //will list names in original file order (sorted by id, NOT by name)   
+        for (int i = 0; i < 50000; i++) {
+            numbers.addElement(numrandom[i]);
+        }
+              
+        
+
     }//GEN-LAST:event_btnrandomActionPerformed
 
     private void btnbubbleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbubbleActionPerformed
-        
+        numbers.clear();
+        bubbleSort(numrandom);
+        //redisplay in list
+         for (int i = 0; i < 50000; i++) {
+            numbers.addElement(numrandom[i]);
+        }
     }//GEN-LAST:event_btnbubbleActionPerformed
 
     public static void main(String args[]) {
@@ -137,8 +156,17 @@ public class RngSort extends javax.swing.JFrame {
                 new RngSort().setVisible(true);
             }
         });
+    }   
+     public static int generate(){
+         int rng = 0;
+     
+          for (int i = 0; i < 50000; i++) {
+            rng = (int) (Math.random() * 50000 + 1);
+        }
+          return rng;
     }
 
+////////////////////////////////////////
     public static void bubbleSort(int[] a){
    	int k = 0;
    	boolean exchangeMade = true;
@@ -223,7 +251,7 @@ public static void swap(int[] a, int x, int y){
     private javax.swing.JButton btnquick;
     private javax.swing.JButton btnrandom;
     private javax.swing.JButton jButton2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea txtoutput;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JList<String> lstoutput;
     // End of variables declaration//GEN-END:variables
 }
