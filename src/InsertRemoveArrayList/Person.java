@@ -12,7 +12,26 @@ public class Person implements Comparable <Person> {
     public String getName(){
         return name;
     }
+    
+    public void setAge(int a){
+        age = a;
+    }
 
+    public int getAge() {
+        return age;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" + "name=" + name + ", age=" + age + '}';
+    }
+
+    
+    
     @Override
     public int compareTo(Person t) {
        return name.compareTo(t.getName());
