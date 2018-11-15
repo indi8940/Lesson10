@@ -1,21 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package InsertRemoveArrayList;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author indi8940
- */
 public class PersonArrayListFIXED {
-
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         ArrayList<Person> people = new ArrayList();
         people.add(new Person("Burns Monty", 92));
