@@ -127,7 +127,6 @@ public class RngSort extends javax.swing.JFrame {
     private void btnbubbleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbubbleActionPerformed
         numbers.clear();
         bubbleSort(numrandom);
-        //redisplay in list
 
         long totalRuntime = 0;
 
@@ -138,11 +137,11 @@ public class RngSort extends javax.swing.JFrame {
 
             totalRuntime += (endTime - startTime);
         }
-
+        //redisplay in list
         for (int s : numrandom) {
             numbers.addElement(s);
         }
-        System.out.println("It took " + totalRuntime + " Milliseconds to Sort using BubbleSort");
+        System.out.println("It took " + totalRuntime + " Milliseconds to Sort using Bubble Sort");
         btnbubble.disable();
         btnexchange.disable();
         btnInsertion.disable();
@@ -151,10 +150,21 @@ public class RngSort extends javax.swing.JFrame {
     private void btnexchangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnexchangeActionPerformed
         numbers.clear();
         selectionSort(numrandom);
+
+        long totalRuntime = 0;
+
+        for (int i = 0; i < 50000; i++) {
+            long startTime = System.currentTimeMillis();
+            selectionSort(numrandom);
+            long endTime = System.currentTimeMillis();
+
+            totalRuntime += (endTime - startTime);
+        }
         //redisplay in list
         for (int s : numrandom) {
             numbers.addElement(s);
         }
+        System.out.println("It took " + totalRuntime + " Milliseconds to Sort using Exchange Sort");
         btnbubble.disable();
         btnexchange.disable();
         btnInsertion.disable();
@@ -163,10 +173,21 @@ public class RngSort extends javax.swing.JFrame {
     private void btnInsertionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertionActionPerformed
         numbers.clear();
         insertionSort(numrandom);
+
+        long totalRuntime = 0;
+
+        for (int i = 0; i < 50000; i++) {
+            long startTime = System.currentTimeMillis();
+            insertionSort(numrandom);
+            long endTime = System.currentTimeMillis();
+
+            totalRuntime += (endTime - startTime);
+        }
         //redisplay in list
         for (int s : numrandom) {
             numbers.addElement(s);
         }
+        System.out.println("It took " + totalRuntime + " Milliseconds to Sort using Insertion Sort");
         btnbubble.disable();
         btnexchange.disable();
         btnInsertion.disable();
