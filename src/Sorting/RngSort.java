@@ -129,13 +129,21 @@ public class RngSort extends javax.swing.JFrame {
         numbers.clear();
         bubbleSort(numrandom);
         //redisplay in list
-         for (int s: numrandom) {
+         
+         long totalRuntime = 0;
+         
+         for (int i = 0; i < 50000; i++) {
+            long startTime = System.currentTimeMillis();
+            bubbleSort(numrandom);
+            long endTime = System.currentTimeMillis();
+            
+            totalRuntime += (endTime - startTime);
+        }
+    
+    for (int s: numrandom) {
             numbers.addElement(s);
         }
-         long totalRuntime = 0;
-
-           for(int i = 0; i < 100; i++)
-
+    System.out.println("It took " + totalRuntime + "Milliseconds to Sort using BubbleSort");
          btnbubble.disable();
     }//GEN-LAST:event_btnbubbleActionPerformed
 
