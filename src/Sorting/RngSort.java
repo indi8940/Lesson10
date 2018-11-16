@@ -143,8 +143,10 @@ public class RngSort extends javax.swing.JFrame {
     for (int s: numrandom) {
             numbers.addElement(s);
         }
-    System.out.println("It took " + totalRuntime + "Milliseconds to Sort using BubbleSort");
+    System.out.println("It took " + totalRuntime + " Milliseconds to Sort using BubbleSort");
          btnbubble.disable();
+         btnexchange.disable();
+         btnInsertion.disable();
     }//GEN-LAST:event_btnbubbleActionPerformed
 
     private void btnexchangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnexchangeActionPerformed
@@ -154,7 +156,9 @@ public class RngSort extends javax.swing.JFrame {
          for (int s: numrandom) {
             numbers.addElement(s);
         }
-           btnexchange.disable();
+             btnbubble.disable();
+         btnexchange.disable();
+         btnInsertion.disable();
     }//GEN-LAST:event_btnexchangeActionPerformed
 
     private void btnInsertionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertionActionPerformed
@@ -164,7 +168,9 @@ public class RngSort extends javax.swing.JFrame {
          for (int s: numrandom) {
             numbers.addElement(s);
         }
-           btnInsertion.disable();
+            btnbubble.disable();
+         btnexchange.disable();
+         btnInsertion.disable();
     }//GEN-LAST:event_btnInsertionActionPerformed
 
     public static void main(String args[]) {
