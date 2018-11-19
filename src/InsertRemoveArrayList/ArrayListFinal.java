@@ -1,15 +1,25 @@
 package InsertRemoveArrayList;
 
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+
 public class ArrayListFinal extends javax.swing.JFrame {
 
+    ArrayList<String> people = new ArrayList();
+    DefaultListModel list = new DefaultListModel();
+    
     public ArrayListFinal() {
         initComponents();
+    people.add(new Person("Burns Monty", 92,"M"));
+        
+        personlist.setModel(list);
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jScrollPane1 = new javax.swing.JScrollPane();
         personlist = new javax.swing.JList<>();
         jPanel1 = new javax.swing.JPanel();
@@ -37,10 +47,14 @@ public class ArrayListFinal extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        buttonGroup1.add(rbtnmale);
         rbtnmale.setSelected(true);
         rbtnmale.setText("Male");
+        rbtnmale.setActionCommand("male");
 
+        buttonGroup1.add(rbtnfemale);
         rbtnfemale.setText("Female");
+        rbtnfemale.setActionCommand("female");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -96,6 +110,11 @@ public class ArrayListFinal extends javax.swing.JFrame {
         mnuadd.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         mnuadd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/InsertRemoveArrayList/insert.png"))); // NOI18N
         mnuadd.setText("Add");
+        mnuadd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuaddActionPerformed(evt);
+            }
+        });
         jMenu2.add(mnuadd);
 
         mnudelete.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
@@ -139,14 +158,13 @@ public class ArrayListFinal extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtname))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, Short.MAX_VALUE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addGap(18, 18, 18)
-                            .addComponent(txtage))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtage)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -179,7 +197,14 @@ public class ArrayListFinal extends javax.swing.JFrame {
 
     private void mnuclearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuclearActionPerformed
         // TODO add your handling code here:
+        txtage.setText("");
+        txtname.setText("");
     }//GEN-LAST:event_mnuclearActionPerformed
+
+    private void mnuaddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuaddActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_mnuaddActionPerformed
 
     /**
      * @param args the command line arguments
@@ -217,6 +242,7 @@ public class ArrayListFinal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;

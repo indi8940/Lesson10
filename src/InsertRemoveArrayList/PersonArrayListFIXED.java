@@ -5,10 +5,10 @@ import java.util.ArrayList;
 public class PersonArrayListFIXED {
     public static void main(String[] args) {
         ArrayList<Person> people = new ArrayList();
-        people.add(new Person("Burns Monty", 92));
-        people.add(new Person("Prince, Martin", 58));
-        people.add(new Person("Simpson, Bart", 13));
-        people.add(new Person("Van Houten, Millhouse", 12));
+        people.add(new Person("Burns Monty", 92,"M"));
+        people.add(new Person("Prince, Martin", 58,"M"));
+        people.add(new Person("Simpson, Bart", 13,"M"));
+        people.add(new Person("Van Houten, Millhouse", 12,"M"));
 
         for (Person x : people) {
             System.out.println(x.getName() + "\t" + x.getAge());
@@ -17,8 +17,8 @@ public class PersonArrayListFIXED {
         System.out.println(people);
 
         Person a, b;
-        a = new Person("Simpson, Maggie", 1);
-        b = new Person("Whiggum, Clancy", 44);
+        a = new Person("Simpson, Maggie", 1,"F");
+        b = new Person("Whiggum, Clancy", 44,"M");
         System.out.println("Instering Maggie and Clancy");
         int loc;
         loc = findInsertPoint(people, a);
@@ -27,7 +27,7 @@ public class PersonArrayListFIXED {
         people.add(loc, b);
 
         System.out.println("Removing Millhouse");
-        Person temp = new Person("Van Houten, Millhouse", 12);
+        Person temp = new Person("Van Houten, Millhouse", 12,"M");
         loc = search(people, temp);
         people.remove(loc);
         System.out.println("====================== \n Final List!");
