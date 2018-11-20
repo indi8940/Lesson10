@@ -1,18 +1,67 @@
 package InsertRemoveArrayList;
 
+import static InsertRemoveArrayList.FruitArrayListV.findInsertPoint;
+import Searching.ISSStudent;
+import static Searching.StudentSearch.search;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 public class ArrayListFinal extends javax.swing.JFrame {
 
-    ArrayList<String> people = new ArrayList();
+    ArrayList<Person> people = new ArrayList();
     DefaultListModel list = new DefaultListModel();
-    
+
     public ArrayListFinal() {
         initComponents();
-    people.add(new Person("Burns Monty", 92,"M"));
-        
+        people.add(new Person("Bob", 25, "M"));
+        people.add(new Person("Fran", 55, "F"));
+        people.add(new Person("Mike", 15, "M"));
+        people.add(new Person("Sue", 30, "F"));
         personlist.setModel(list);
+        for (Person p : people) {
+            list.addElement(p.getName());
+        }
+    }
+
+    public static int search(ArrayList a, Object searchValue) {
+        int left = 0;
+        int right = a.size() - 1;
+        while (left <= right) {
+            int midpoint = (left + right) / 2;
+            int result = ((Comparable) a.get(midpoint)).compareTo(searchValue);
+            if (result == 0) {
+                return midpoint;
+            } else if (result < 0) {
+                left = midpoint + 1;
+            } else {
+                right = midpoint - 1;
+            }
+        }
+        return -1;
+
+    }
+
+    public static int findInsertPoint(ArrayList a, Object searchValue) {
+        int left = 0;
+        int right = a.size() - 1;
+        int midpoint = 0;
+
+        while (left <= right) {
+            midpoint = (left + right) / 2;
+
+            int result = ((Comparable) a.get(midpoint)).compareTo(searchValue);
+
+            if (result < 0) {
+                left = midpoint + 1;
+            } else {
+                right = midpoint - 1;
+            }
+        }
+        if (((Comparable) a.get(midpoint)).compareTo(searchValue) < 0) {
+            midpoint++;
+        }
+        return midpoint;
     }
 
     @SuppressWarnings("unchecked")
@@ -29,6 +78,7 @@ public class ArrayListFinal extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtname = new javax.swing.JTextField();
         txtage = new javax.swing.JTextField();
+        lbltext = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         mnuexit = new javax.swing.JMenuItem();
@@ -43,6 +93,11 @@ public class ArrayListFinal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        personlist.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                personlistMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(personlist);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -50,11 +105,11 @@ public class ArrayListFinal extends javax.swing.JFrame {
         buttonGroup1.add(rbtnmale);
         rbtnmale.setSelected(true);
         rbtnmale.setText("Male");
-        rbtnmale.setActionCommand("male");
+        rbtnmale.setActionCommand("M");
 
         buttonGroup1.add(rbtnfemale);
         rbtnfemale.setText("Female");
-        rbtnfemale.setActionCommand("female");
+        rbtnfemale.setActionCommand("F");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -120,6 +175,11 @@ public class ArrayListFinal extends javax.swing.JFrame {
         mnudelete.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
         mnudelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/InsertRemoveArrayList/delete.png"))); // NOI18N
         mnudelete.setText("Delete");
+        mnudelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnudeleteActionPerformed(evt);
+            }
+        });
         jMenu2.add(mnudelete);
 
         jMenuBar1.add(jMenu2);
@@ -129,11 +189,21 @@ public class ArrayListFinal extends javax.swing.JFrame {
         mnuall.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.SHIFT_MASK));
         mnuall.setIcon(new javax.swing.ImageIcon(getClass().getResource("/InsertRemoveArrayList/all.png"))); // NOI18N
         mnuall.setText("Show All");
+        mnuall.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuallActionPerformed(evt);
+            }
+        });
         jMenu3.add(mnuall);
 
         mnufemale.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.SHIFT_MASK));
         mnufemale.setIcon(new javax.swing.ImageIcon(getClass().getResource("/InsertRemoveArrayList/female.png"))); // NOI18N
         mnufemale.setText("Female");
+        mnufemale.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnufemaleActionPerformed(evt);
+            }
+        });
         jMenu3.add(mnufemale);
 
         mnumale.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.SHIFT_MASK));
@@ -151,20 +221,25 @@ public class ArrayListFinal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtname))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lbltext, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(txtage)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtname))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtage)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -180,11 +255,13 @@ public class ArrayListFinal extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(txtage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbltext, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -197,14 +274,78 @@ public class ArrayListFinal extends javax.swing.JFrame {
 
     private void mnuclearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuclearActionPerformed
         // TODO add your handling code here:
-        txtage.setText("");
-        txtname.setText("");
+        clearForm();
+        list.removeAllElements();
     }//GEN-LAST:event_mnuclearActionPerformed
 
     private void mnuaddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuaddActionPerformed
         // TODO add your handling code here:
-        
+        //  String newperson = JOptionPane.showInputDialog(this, "Enter Name of new Person"); int loc = findInsertPoint(people, newperson);add to both arraylist AND the List Model people.add(loc, newperson); list.add(loc, newperson);
+        String nm = txtname.getText();
+        int ag = Integer.parseInt(txtage.getText());
+        String type = buttonGroup1.getSelection().getActionCommand();
+
+        Person temp = new Person(nm, ag, type);
+        int result = search(people, temp);
+        if (result >= 0) {
+            lbltext.setText("Person Already in List");
+        } else {
+            lbltext.setText("");
+            int loc = findInsertPoint(people, temp);
+            people.add(loc, temp);
+            list.addElement(temp.getName());
+            clearForm();
+        }
+
     }//GEN-LAST:event_mnuaddActionPerformed
+
+    private void mnudeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnudeleteActionPerformed
+        // TODO add your handling code here:
+        String nm = txtname.getText();
+        Person temp = new Person(nm, 0, "");
+        int result = search(people, temp);
+        if (result >= 0) {
+            people.remove(result);
+            list.removeElementAt(result);
+            txtname.setText("");
+        } else {
+            lbltext.setText("Person not found.");
+        }
+    }//GEN-LAST:event_mnudeleteActionPerformed
+
+    private void personlistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_personlistMouseClicked
+        // TODO add your handling code here:
+        String name = "" + personlist.getSelectedValue();
+        int loc = search(people, new Person(name, 0, ""));
+        show(people.get(loc));
+
+    }//GEN-LAST:event_personlistMouseClicked
+
+    private void mnuallActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuallActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_mnuallActionPerformed
+
+    private void mnufemaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnufemaleActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_mnufemaleActionPerformed
+    public void show(Person p) {
+        txtname.setText(p.getName());
+        txtage.setText("" + p.getAge());
+        if (p.getGender() == "M") {
+            rbtnmale.setSelected(true);
+        } else {
+            rbtnfemale.setSelected(true);
+        }
+    }
+
+    public void clearForm() {
+        txtage.setText("");
+        txtname.setText("");
+        buttonGroup1.clearSelection();
+        personlist.clearSelection();
+    }
 
     /**
      * @param args the command line arguments
@@ -238,6 +379,7 @@ public class ArrayListFinal extends javax.swing.JFrame {
             public void run() {
                 new ArrayListFinal().setVisible(true);
             }
+
         });
     }
 
@@ -251,6 +393,7 @@ public class ArrayListFinal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbltext;
     private javax.swing.JMenuItem mnuadd;
     private javax.swing.JMenuItem mnuall;
     private javax.swing.JMenuItem mnuclear;
